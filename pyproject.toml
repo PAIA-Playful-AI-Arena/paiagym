@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mlgym"
-version = "0.0.4"
+version = "0.0.1"
 authors = [
     { name="timcsy", email="timocsy@yahoo.com.tw" },
 ]
