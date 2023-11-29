@@ -20,3 +20,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/PAIA-Playful-AI-Arena/mlgym"
 "Bug Tracker" = "https://github.com/PAIA-Playful-AI-Arena/mlgym/issues"
+
+[project.scripts]
+mlgym = "mlgym:game.main"
