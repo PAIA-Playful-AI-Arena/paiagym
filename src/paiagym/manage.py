@@ -1,5 +1,5 @@
 '''
-Manage games (where is the execution path, ...) in the MLGym.
+Manage games (where is the execution path, ...) in the PAIAGym.
 '''
 
 from io import BytesIO
@@ -11,10 +11,10 @@ import requests
 from typing import Dict
 import zipfile
 
-MLGYM_GAMES_URL = 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/mlgym/master/games.json'
+PAIAGYM_GAMES_URL = 'https://raw.githubusercontent.com/PAIA-Playful-AI-Arena/paiagym/master/games.json'
 
 def get_games() -> Dict:
-    response = requests.get(MLGYM_GAMES_URL)
+    response = requests.get(PAIAGYM_GAMES_URL)
     games = json.loads(response.content)
     return games
 
@@ -40,7 +40,10 @@ def add(name: str, path: str) -> None:
 
 def install(name: str) -> None:
     games = get_games()
-    game_url = games[name]
+    if not name in games or games[name] is None:
+        game_url = f'https://github.com/PAIA-Playful-AI-Arena/paiagym_{name}/archive/refs/heads/master.zip'
+    else:
+        game_url = games[name]
     response = requests.get(game_url)
     game_path = f'games/{name}'
     zipfile.ZipFile(BytesIO(response.content)).extractall(game_path)

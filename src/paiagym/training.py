@@ -1,7 +1,7 @@
 import sys
-from mlgym.games.kart3d.kart3d import kart_env
+from paiagym.games.kart3d.kart3d import kart_env
 
-from mlgym.utils import import_script
+from paiagym.utils import import_script
 
 if __name__ == '__main__':
     file_name = None

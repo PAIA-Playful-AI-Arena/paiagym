@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mlgym"
+name = "paiagym"
 version = "0.0.1"
 authors = [
     { name="timcsy", email="timocsy@yahoo.com.tw" },
@@ -18,8 +18,8 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/PAIA-Playful-AI-Arena/mlgym"
-"Bug Tracker" = "https://github.com/PAIA-Playful-AI-Arena/mlgym/issues"
+"Homepage" = "https://github.com/PAIA-Playful-AI-Arena/paiagym"
+"Bug Tracker" = "https://github.com/PAIA-Playful-AI-Arena/paiagym/issues"
 
 [project.scripts]
-mlgym = "mlgym:game.main"
+paiagym = "paiagym:paiagym.main"

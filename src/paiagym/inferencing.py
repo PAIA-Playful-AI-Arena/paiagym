@@ -1,6 +1,6 @@
 import sys
 
-from mlgym.utils import import_game, import_script
+from paiagym.utils import import_game, import_script
 
 if __name__ == '__main__':
     script_path = None
