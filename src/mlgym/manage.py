@@ -5,6 +5,8 @@ Manage games (where is the execution path, ...) in the MLGym.
 from io import BytesIO
 import json
 import os
+import shutil
+from sys import platform
 import requests
 from typing import Dict
 import zipfile
@@ -15,6 +17,17 @@ def get_games() -> Dict:
     response = requests.get(MLGYM_GAMES_URL)
     games = json.loads(response.content)
     return games
+
+def download_game(game_path: str) -> None:
+    with open(os.path.join(game_path, 'game.json'), 'wb') as fin:
+        game = json.load(fin)
+    
+    if platform == 'win32':
+        pass
+    elif platform == 'linux' or platform == 'linux2':
+        pass
+    elif platform == 'darwin':
+        pass
 
 def add(name: str, path: str) -> None:
     games = {}
@@ -31,7 +44,15 @@ def install(name: str) -> None:
     response = requests.get(game_url)
     game_path = f'games/{name}'
     zipfile.ZipFile(BytesIO(response.content)).extractall(game_path)
+    download_game(game_path)
     add(name, game_path)
+
+def update(name: str, path: str) -> None:
+    remove(name)
+    if path is None:
+        install(name)
+    else:
+        add(name, path)
 
 def remove(name: str) -> None:
     games = {}
@@ -47,5 +68,5 @@ def uninstall(name: str) -> None:
     if os.path.exists('games/list.json'):
         with open('games/list.json', 'r') as fin:
             games = json.load(fin)
-    os.rmdir(games[name]['path'])
+    shutil.rmtree(games[name]['path'])
     remove(name)
