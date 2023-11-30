@@ -1,1 +1,2 @@
-from paiagym.paia_game import PAIAGame
+from paiagym.game import PAIAGame
+from paiagym.wrapper import GameData, PAIAWrapper
