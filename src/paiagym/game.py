@@ -3,13 +3,17 @@ from sys import platform
 
 class PAIAGame:
     def __init__(self):
-        self.name = None
-        self.result = None
+        self.name = None # for unity_path
     
-    def env(self):
+    def make_env(self):
         pass
 
     def unity_path(self, game_dir: str):
+        '''
+        override with the following in the new Game:
+
+        return super().unity_path(os.path.dirname(__file__))
+        '''
         binary_path = os.path.join(game_dir, 'build')
         game_path = None
         if platform == 'win32':
@@ -22,6 +26,12 @@ class PAIAGame:
             return game_path
         else:
             return None
+    
+    def on_start(self, env, game_data):
+        pass
         
-    def result_handler(self, env, game_data):
+    def on_step(self, env, game_data):
+        pass
+
+    def on_finish(self, env, game_data, result):
         pass
