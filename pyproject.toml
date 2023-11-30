@@ -22,4 +22,4 @@ classifiers = [
 "Bug Tracker" = "https://github.com/PAIA-Playful-AI-Arena/paiagym/issues"
 
 [project.scripts]
-paiagym = "paiagym:paiagym.main"
+paiagym = "paiagym:main.main"

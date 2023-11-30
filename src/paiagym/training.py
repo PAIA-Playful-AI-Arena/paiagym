@@ -1,17 +1,16 @@
 import sys
-from paiagym.games.kart3d.kart3d import kart_env
 
-from paiagym.utils import import_script
+from paiagym.utils import import_game, import_script
 
 if __name__ == '__main__':
-    file_name = None
     script_path = None
     if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    if len(sys.argv) > 2:
-        script_path = sys.argv[2]
+        script_path = sys.argv[1]
     
-    env = kart_env(file_name=file_name)
+    Game = import_game('kart3d')
+    game = Game()
+    env = game.env(file_name=game.unity_path())
+
     MLPlay = import_script(script_path)
     player = MLPlay(env, kart_names=['No 1'], seed=None, early_stop=True)
     player.learn(total_timesteps=100_000)

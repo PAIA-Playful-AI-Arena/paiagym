@@ -41,7 +41,7 @@ def add(name: str, path: str) -> None:
 def install(name: str) -> None:
     games = get_games()
     if not name in games or games[name] is None:
-        game_url = f'https://github.com/PAIA-Playful-AI-Arena/paiagym_{name}/archive/refs/heads/master.zip'
+        game_url = f'https://github.com/PAIA-Playful-AI-Arena/paiagym-{name}/archive/refs/heads/master.zip'
     else:
         game_url = games[name]
     response = requests.get(game_url)
