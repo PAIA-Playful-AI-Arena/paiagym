@@ -50,7 +50,7 @@ List games in production:
 paiagym ls -m prod
 ```
 
-## Using the Container
+## Usage for Container
 
 You can checkout the Dockerfile for the Docker container.
 
