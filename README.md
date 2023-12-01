@@ -73,6 +73,7 @@ If you are using Linux server, run before starting the container (install and co
 ```
 sudo sh display.sh
 ```
+display.sh can be found at [display.sh](https://github.com/PAIA-Playful-AI-Arena/paiagym/blob/master/display.sh).
 
 To start the container:
 ```
