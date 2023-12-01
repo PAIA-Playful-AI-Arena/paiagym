@@ -1,4 +1,5 @@
 import sys
+from paiagym.config import ENV
 from paiagym.manage import add, install, list_all_games, list_available_games, remove, uninstall, update
 from paiagym.inferencing import inferencing
 from paiagym.training import training
@@ -7,7 +8,7 @@ def main():
     games = []
     game = None
     path = None
-    script_path = None
+    input_scripts = None
 
     if len(sys.argv) > 1:
         op = sys.argv[1]
@@ -51,14 +52,22 @@ def main():
             if len(sys.argv) > 4:
                 game = sys.argv[2]
                 if sys.argv[3] == '-i':
-                    script_path = sys.argv[4]
-                    inferencing(game_name=game, scripts=[script_path])
+                    input_scripts = sys.argv[4]
+            if game is not None:
+                ENV['GAME_NAME'] = game
+            if input_scripts is not None:
+                ENV['INPUT_SCRIPTS'] = input_scripts
+            inferencing()
         elif op == 'train':
             if len(sys.argv) > 4:
                 game = sys.argv[2]
                 if sys.argv[3] == '-i':
-                    script_path = sys.argv[4]
-                    training(game_name=game, scripts=[script_path])
+                    input_scripts = sys.argv[4]
+            if game is not None:
+                ENV['GAME_NAME'] = game
+            if input_scripts is not None:
+                ENV['INPUT_SCRIPTS'] = input_scripts
+            training()
 
 if __name__ == '__main__':
     main()

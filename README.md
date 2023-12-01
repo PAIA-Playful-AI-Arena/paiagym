@@ -54,6 +54,11 @@ paiagym ls -m prod
 
 You can checkout the Dockerfile for the Docker container.
 
+To build the Docker image:
+```
+docker build -t paiagym:base . --no-cache
+```
+
 If you are using Linux server, run before starting the container (install and config X server with NVIDIA Driver):
 ```
 sudo sh display.sh

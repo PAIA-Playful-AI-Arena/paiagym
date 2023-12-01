@@ -11,5 +11,3 @@ RUN apt-get update && apt -y install \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir paiagym
-
-RUN pip install --no-cache-dir google-cloud-storage azure-storage-blob boto3

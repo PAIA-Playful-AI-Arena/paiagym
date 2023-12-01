@@ -1,4 +1,8 @@
+import json
+import os
 from gymnasium import Wrapper
+
+from paiagym.config import ENV, bool_ENV, int_ENV
 
 class GameData:
     def __init__(self):
@@ -46,16 +50,48 @@ class PAIAWrapper(Wrapper):
         return observation, reward, terminated, truncated, info
     
     def on_start(self, env, game_data):
-        env.unwrapped.begin_render(960, 540)
+        # environment variables
+        record_video = bool_ENV('RECORD_VIDEO', False)
+        width = int_ENV('VIDEO_WIDTH', 1920)
+        height = int_ENV('VIDEO_HEIGHT', 1080)
+        fullscreen = bool_ENV('VIDEO_FULLSCREEN', False)
+        
+        if record_video:
+            env.unwrapped.begin_render(screen_width=width, screen_height=height, fullscreen=fullscreen)
     
     def on_step(self, env, game_data):
         return None # result
     
     def on_finish(self, env, game_data, result):
-        env.unwrapped.end_render()
-        video = env.render()
-        with open('video.mp4', 'wb') as fout:
-            fout.write(video)
-            print('Video saved')
+        # environment variables
+        save_game_result = bool_ENV('SAVE_GAME_RESULT', False)
+        game_result_dir = os.path.abspath(ENV.get('GAME_RESULT_DIR', 'result'))
+        game_result_filename = ENV.get('GAME_RESULT_FILENAME', 'game_result.json')
+        record_video = bool_ENV('RECORD_VIDEO', False)
+        video_filename = ENV.get('VIDEO_FILENAME', 'video.mp4')
+
+        if record_video or save_game_result:
+            if not os.path.exists(game_result_dir):
+                os.makedirs(game_result_dir)
+
+        if record_video:
+            env.unwrapped.end_render()
+            video = env.render()
+            video_path = os.path.join(game_result_dir, video_filename)
+            with open(video_path, 'wb') as fout:
+                fout.write(video)
+                print(f'Video saved at {video_path}')
         
-        print(result)
+        game_result_path = os.path.join(game_result_dir, game_result_filename)
+        with open(game_result_path, 'w') as fout:
+            game_result = [
+                {
+                    'player': '1P',
+                    'progress': result['progress'],
+                    'used_time': result['used_time']
+                }
+            ]
+            print(game_result)
+            if save_game_result:
+                json.dump(game_result, fout, indent=4)
+                print(f'Game result saved at {game_result_path}')

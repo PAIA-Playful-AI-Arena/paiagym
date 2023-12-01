@@ -1,15 +1,19 @@
 import sys
-from typing import List
 
+from paiagym.config import ENV
 from paiagym.utils import import_game, import_script
 
-def inferencing(game_name: str, scripts: List[str]) -> None:
+def inferencing() -> None:
+    # environment variables
+    game_name = ENV.get('GAME_NAME', '')
+    input_scripts = ENV.get('INPUT_SCRIPTS', 'ml_play.py').split(':')
+
     Game = import_game(game_name)
     game = Game()
     env = game.make_env()
 
-    MLPlay = import_script(scripts[0])
-    player = MLPlay(env, kart_names=['No 1'], seed=None, early_stop=False)
+    MLPlay = import_script(input_scripts[0])
+    player = MLPlay(env)
 
     observation, info = player.reset()
 
@@ -24,9 +28,14 @@ def inferencing(game_name: str, scripts: List[str]) -> None:
 
 if __name__ == '__main__':
     game_name = None
-    script_path = None
+    input_scripts = None
     if len(sys.argv) > 2:
         game_name = sys.argv[1]
-        script_path = sys.argv[2]
+        input_scripts = sys.argv[2]
     
-    inferencing(game_name=game_name, scripts=[script_path])
+    if game_name is not None:
+        ENV['GAME_NAME'] = game_name
+    if input_scripts is not None:
+        ENV['INPUT_SCRIPTS'] = input_scripts
+    
+    inferencing()
