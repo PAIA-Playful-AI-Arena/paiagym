@@ -20,12 +20,22 @@ Uninstall a game:
 paiagym uninstall <game_name>
 ```
 
-Run the inferencing:
+Run the inferencing with given information by the environment variable:
+```
+paiagym run
+```
+
+Run the inferencing with given script path:
 ```
 paiagym run <game_name> -i <script_path>
 ```
 
-Run the training:
+Run the training with given information by the environment variable:
+```
+paiagym train
+```
+
+Run the training with given script path:
 ```
 paiagym train <game_name> -i <script_path>
 ```

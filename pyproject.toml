@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "paiagym"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
     { name="timcsy", email="timocsy@yahoo.com.tw" },
 ]
@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "gymize>=0.0.1",
+    "gymize==0.0.2",
     "stable_baselines3",
     "python-dotenv"
 ]
