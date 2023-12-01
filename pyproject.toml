@@ -20,6 +20,7 @@ classifiers = [
 dependencies = [
     "gymize==0.0.2",
     "stable_baselines3",
+    "requests",
     "python-dotenv"
 ]
 
