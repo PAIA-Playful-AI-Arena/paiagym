@@ -11,7 +11,7 @@ then
     if [ ! -z "$(which nvidia-xconfig)" ]
     then
         # using NVIDIA Driver on machine with GPU Driver
-        nvidia-xconfig -a --allow-empty-initial-configuration --virtual=1920x1080
+        nvidia-xconfig -a --allow-empty-initial-configuration --virtual=3840x2160
     else
         # Download a virtual screen config for machine without GPU (using only CPU)
         if [ -z "$(which wget)" ]
